@@ -3,7 +3,7 @@
 
 ## Overview
 
-This project examines whether the relationship between gold and crude oil prices changed following the onset of the 2026 Strait of Hormuz crisis. Using daily futures price data, I computed the correlation between gold and crude oil daily returns during a "calm" period before the crisis and compared it to the correlation during the crisis period itself. The analysis found that the correlation was weak in both periods, but shifted from mildly positive (0.137) before the crisis to mildly negative (-0.278) during it — a real, if modest, change in how the two assets moved relative to each other.
+This project examines whether the relationship between gold and crude oil prices changed following the onset of the 2026 Strait of Hormuz crisis. Using daily futures price data, I computed the correlation between gold and crude oil daily returns during a "calm" period before the crisis and compared it to the correlation during the crisis period itself. The analysis found that the correlation was weak in both periods, but shifted from mildly positive (0.137) before the crisis to mildly negative (-0.278) during it.
 
 ## Question and Hypothesis
 
@@ -18,6 +18,7 @@ This project examines whether the relationship between gold and crude oil prices
 - **Crude oil:** `CL=F` (NYMEX WTI crude oil futures, continuous front-month contract)
 - **Source:** Yahoo Finance, retrieved via the `yfinance` Python library
 - **Date range:** August 2025 – August 2026, split into a ~6-month calm period and a ~6-month crisis period (length-matched for a fair comparison — see *Method* below)
+
 
 
 ## Method
@@ -35,13 +36,17 @@ This project examines whether the relationship between gold and crude oil prices
 
 ![Rolling Correlation](rolling_correlation.png)
 
-The rolling correlation chart shows that the relationship was already unstable *before* the crisis, oscillating between positive and negative — this is consistent with a static correlation this weak, since a low average often reflects a relationship that swings back and forth rather than one that's mildly positive throughout. Following the crisis onset, the rolling correlation shows a more sustained lean toward negative territory.
+The rolling correlation chart shows that the relationship was already unstable *before* the crisis, oscillating between positive and negative. This is consistent with a static correlation this weak, since a low average often reflects a relationship that swings back and forth rather than one that's mildly positive throughout. Following the crisis onset, the rolling correlation shows a more sustained lean toward negative territory.
 
 ![Calm vs Crisis Scatter](calm_vs_crisis_scatter.png)
 
-The side-by-side scatter plots visually confirm the weak correlation in both periods — neither cloud of points shows a clear diagonal trend, consistent with the low correlation coefficients. Notably, the crisis-period scatter shows a wider vertical spread (larger swings in oil returns) than the calm period, suggesting **crude oil became more volatile during the crisis independent of its correlation with gold** — a separate finding worth noting alongside the correlation shift itself.
+The side-by-side scatter plots visually confirm the weak correlation in both periods. Neither cloud of points shows a clear diagonal trend, consistent with the low correlation coefficients. Notably, the crisis-period scatter shows a wider vertical spread (larger swings in oil returns) than the calm period, suggesting **crude oil became more volatile during the crisis independent of its correlation with gold**.
 
-**Interpretation:** A plausible explanation is that gold and oil are normally linked loosely through shared macroeconomic drivers (e.g. dollar strength, general risk sentiment) — a confounding variable rather than a direct causal relationship. During the crisis, oil was driven by a direct supply shock specific to itself, while gold likely saw increased safe-haven demand — two different mechanisms that may have pulled the assets' daily moves out of sync rather than together.
+![Price Trends](price_trends.png)
+
+This chart shows the underlying price levels for both assets over the full timeline, with the crisis start date marked. It provides context for the return-based analysis above, showing what was actually happening to each asset's price while the correlation between them was shifting.
+
+**Interpretation:** A plausible explanation is that gold and oil are normally linked loosely through shared macroeconomic drivers (e.g. dollar strength, general risk sentiment), a confounding variable rather than a direct causal relationship. During the crisis, oil was driven by a direct supply shock specific to itself, while gold likely saw increased safe-haven demand. Two different mechanisms that may have pulled the assets' daily moves out of sync rather than together.
 
 ## Limitations
 
@@ -59,3 +64,4 @@ python correlation_analysis.py
 ```
 
 **Requirements:** `pandas`, `numpy`, `matplotlib`, `yfinance`
+
